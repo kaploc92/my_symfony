@@ -1,0 +1,39 @@
+easy_admin:
+    site_name: Conference Guestbook
+
+    design:
+        menu:
+            - { route: 'homepage', label: 'Back to the website', icon: 'home' }
+            - { entity: 'Conference', label: 'Conferences', icon: 'map-marker' }
+            - { entity: 'Comment', label: 'Comments', icon: 'comments' }
+
+    entities:
+        Conference:
+            class: App\Entity\Conference
+            edit:
+                fields:
+                    - city
+                    - year
+                    - slug
+                    - { property: 'isInternational', type: checkbox }
+
+        Comment:
+            class: App\Entity\Comment
+            list:
+                fields:
+                    - author
+                    - { property: 'email', type: 'email' }
+                    - { property: 'createdAt', type: 'datetime' }
+                    - { property: 'photoFilename', type: 'image', 'base_path': "/uploads/photos", label: 'Photo' }
+                    - state
+                sort: ['createdAt', 'ASC']
+                filters: ['conference']
+            edit:
+                fields:
+                    - { property: 'conference' }
+                    - { property: 'createdAt', type: datetime, type_options: { disabled: true } }
+                    - 'author'
+                    - { property: 'state' }
+                    - { property: 'email', type: 'email' }
+                    - text
+    

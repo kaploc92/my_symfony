@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    database:
+        image: mysql:5.7.24
+        environment:
+            MYSQL_USER: root            
+            #MYSQL_PASSWORD: 
+            MYSQL_DB: guestbook_database_1
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        ports: [3306]
+
+    redis:
+        image: redis:5-alpine
+        ports: [6380]
+
+    rabbitmq:
+        image: rabbitmq:3.7-management
+        ports: [5672, 15672]
+
+  #  mailer:
+  #      image: schickling/mailcatcher
+  #      ports: [1025, 1080]
+
+ #   blackfire:
+ #       image: blackfire/blackfire
+ #       env_file: .env.local
+  #      ports: [8707]*
